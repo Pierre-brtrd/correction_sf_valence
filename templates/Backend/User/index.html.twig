@@ -27,7 +27,7 @@
 						<td>{{ user.email }}</td>
 						<td>{{ user.roles|join(', ')|replace({'ROLE_': ''})|title }}</td>
 						<td>
-							<a href="#" class="btn btn-warning">Editer</a>
+							<a href="{{ path('admin.users.edit', {id: user.id}) }}" class="btn btn-warning">Editer</a>
 						</td>
 					</tr>
 				{% endfor %}
