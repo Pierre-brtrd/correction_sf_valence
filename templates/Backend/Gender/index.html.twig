@@ -26,7 +26,12 @@
 							<td>{{ gender.name }}</td>
 							<td>{{ gender.enable ? 'Actif': 'Inactif' }}</td>
 							<td>
-								<a href="#" class="btn btn-warning">Modifier</a>
+								<a href="{{ path('admin.genders.edit', {id: gender.id}) }}" class="btn btn-warning">Modifier</a>
+								{% include 'Backend/Components/_deleteForm.html.twig' with {
+									url: path('admin.genders.delete', {id: gender.id }), 
+									message: 'Êtes-vous sûr de vouloir supprimer ce genre', 
+									id: gender.id
+								} %}
 							</td>
 						</tr>
 					{% endfor %}
