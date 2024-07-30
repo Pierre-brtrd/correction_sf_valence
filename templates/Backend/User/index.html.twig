@@ -28,6 +28,7 @@
 						<td>{{ user.roles|join(', ')|replace({'ROLE_': ''})|title }}</td>
 						<td>
 							<a href="{{ path('admin.users.edit', {id: user.id}) }}" class="btn btn-warning">Editer</a>
+							{% include 'Backend/User/_deleteForm.html.twig' %}
 						</td>
 					</tr>
 				{% endfor %}
