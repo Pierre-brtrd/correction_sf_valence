@@ -1,0 +1,15 @@
+<div class="card-marque">
+	{% if marque.imageName %}
+		<img src="{{ vich_uploader_asset(marque) }}" alt="{{ marque.name }}" loading="lazy">
+	{% endif %}
+	<div class="card-marque-content">
+		<p class="text-center mt-2 card-marque-name">{{ marque.name }}</p>
+	</div>
+	{% if app.request.get('_route') == 'admin.marques.index' %}
+		<div class="card-btn">
+			<a href="{{ path('admin.marques.edit', {id: marque.id}) }}" class="btn btn-warning">Modifier</a>
+			{# {% include 'Backend/Marques/_deleteForm.html.twig' %} #}
+			<twig:DeleteForm action="{{ path('admin.marques.delete', {id: marque.id}) }}" message="Voulez-vous vraiment supprimer cette marque ?" csrftoken="{{ csrf_token('delete' ~ marque.id) }}"/>
+		</div>
+	{% endif %}
+</div>

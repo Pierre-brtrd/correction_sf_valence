@@ -1,0 +1,21 @@
+<div class="card card-model">
+	<a href="#">
+		<div class="card-model-content">
+			{% if model.imageName %}
+				<img src="{{ vich_uploader_asset(model) }}" alt="{{ model.name }}" loading="lazy">
+			{% endif %}
+			<div class="card-model-content-info">
+				<p class="card-model-model-name mb-0">{{ model.name }}</p>
+				{% if showDetails|default(false) %}
+					<p class="card-model-name fw-bold">{{ model.marque.name }}</p>
+				{% endif %}
+			</div>
+		</div>
+		{% if app.request.get('_route') == 'admin.models.index' %}
+			<div class="card-btn">
+				<a href="{{ path('admin.models.edit', {id: model.id}) }}" class="btn btn-warning">Modifier</a>
+				<twig:DeleteForm action="{{ path('admin.models.delete', {id: model.id}) }}" message="Voulez-vous vraiment supprimer ce model ?" csrftoken="{{ csrf_token('delete' ~ model.id) }}"/>
+			</div>
+		{% endif %}
+	</a>
+</div>
