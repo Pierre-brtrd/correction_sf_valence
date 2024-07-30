@@ -1,20 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello GenderController!{% endblock %}
+{% block title %}
+	Admin des genres
+	{{ parent() }}
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/Users/pierre/Documents/Formations/Symfony/wethenew_valence/src/Controller/Backend/GenderController.php</code></li>
-        <li>Your template at <code>/Users/pierre/Documents/Formations/Symfony/wethenew_valence/templates/backend/gender/index.html.twig</code></li>
-    </ul>
-</div>
+	<section class="container mt-2">
+		<h1 class="text-center">Admin des genres</h1>
+		<a href="{{ path('admin.genders.create') }}" class="btn btn-primary">Créer un genre</a>
+		<div class="table-responsive">
+			<table>
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Nom</th>
+						<th>Visibilité</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for gender in genders %}
+						<tr>
+							<td>{{ gender.id }}</td>
+							<td>{{ gender.name }}</td>
+							<td>{{ gender.enable ? 'Actif': 'Inactif' }}</td>
+							<td>
+								<a href="#" class="btn btn-warning">Modifier</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</section>
 {% endblock %}

@@ -4,8 +4,10 @@ namespace App\Controller\Backend;
 
 use App\Entity\Gender;
 use App\Form\GenderType;
+use App\Repository\GenderRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -18,8 +20,16 @@ class GenderController extends AbstractController
     ) {
     }
 
+    #[Route('', name: '.index', methods: ['GET'])]
+    public function index(GenderRepository $genderRepo): Response
+    {
+        return $this->render('Backend/Gender/index.html.twig', [
+            'genders' => $genderRepo->findAll(),
+        ]);
+    }
+
     #[Route('/create', name: '.create', methods: ['GET', 'POST'])]
-    public function create(Request $request): Response
+    public function create(Request $request): Response|RedirectResponse
     {
         $gender = new Gender();
 
