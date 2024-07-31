@@ -1,0 +1,48 @@
+{% extends 'Backend/base.html.twig' %}
+
+{% block title %}
+	Admin des produits
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<section class="container mt-2">
+		<h1 class="text-center">Admin des produits</h1>
+		<a href="{{ path('admin.products.create') }}" class="btn btn-primary">Créer un produit</a>
+		<table>
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nom</th>
+					<th>Slug</th>
+					<th>Description</th>
+					<th>Marque</th>
+					<th>Model</th>
+					<th>Genre</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for product in products %}
+					<tr>
+						<td>{{ product.id }}</td>
+						<td>{{ product.name }}</td>
+						<td>{{ product.slug }}</td>
+						<td>{{ product.description }}</td>
+						<td>{{ product.marque.name }}</td>
+						<td>{{ product.model.name }}</td>
+						<td>{{ product.gender.name }}</td>
+						<td>
+							<a href="{{ path('admin.products.edit', {id: product.id}) }}" class="btn btn-warning">Modifier</a>
+							{% include 'Backend/Components/_deleteForm.html.twig' with {
+									url: path('admin.products.delete', {id: product.id }), 
+									message: 'Êtes-vous sûr de vouloir supprimer ce produit', 
+									id: product.id
+							} %}
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</section>
+{% endblock %}

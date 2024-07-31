@@ -2,5 +2,6 @@
 @import "abstract/variables";
 @import "abstract/mixins";
 
-// Import Vendor
-@import "vendors/bootstrap";
+// Import base
+@import "base/baseAdmin";
+@import "layout/sidebar";

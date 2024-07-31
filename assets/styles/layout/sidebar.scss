@@ -1,0 +1,13 @@
+body {
+    @include flex($wrap: nowrap);
+}
+
+.sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: scroll;
+    width: 250px;
+    background: $text-color;
+    color: $primary;
+}
