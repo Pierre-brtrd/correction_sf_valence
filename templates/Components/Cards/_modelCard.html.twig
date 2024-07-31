@@ -14,7 +14,10 @@
 		{% if app.request.get('_route') == 'admin.models.index' %}
 			<div class="card-btn">
 				<a href="{{ path('admin.models.edit', {id: model.id}) }}" class="btn btn-warning">Modifier</a>
-				<twig:DeleteForm action="{{ path('admin.models.delete', {id: model.id}) }}" message="Voulez-vous vraiment supprimer ce model ?" csrftoken="{{ csrf_token('delete' ~ model.id) }}"/>
+				{% include 'Backend/Components/_deleteForm.html.twig' with {
+					url: path('admin.models.delete', {id: model.id}),
+					id: model.id
+				} %}
 			</div>
 		{% endif %}
 	</a>
