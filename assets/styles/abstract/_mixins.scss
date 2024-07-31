@@ -1,0 +1,19 @@
+@mixin flex($justify: flex-start, $align: flex-start, $direction: row, $wrap: wrap, $gap: 0, $display: flex) {
+    display: $display;
+    justify-content: $justify;
+    align-items: $align;
+    flex-direction: $direction;
+    flex-wrap: $wrap;
+    gap: $gap;
+}
+
+@mixin grid($columns: 1, $gap: 0, $display: grid, $align: start) {
+    display: $display;
+    grid-template-columns: $columns;
+    gap: $gap;
+    align-items: $align;
+
+    @media screen and (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
+}

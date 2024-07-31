@@ -1,0 +1,42 @@
+{% extends 'Backend/base.html.twig' %}
+
+{% block title %}
+	Admin des genres
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<section class="container mt-2">
+		<h1 class="text-center">Admin des genres</h1>
+		<a href="{{ path('admin.genders.create') }}" class="btn btn-primary">Créer un genre</a>
+		<div class="table-responsive">
+			<table>
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Nom</th>
+						<th>Visibilité</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for gender in genders %}
+						<tr>
+							<td>{{ gender.id }}</td>
+							<td>{{ gender.name }}</td>
+							<td>{{ gender.enable ? 'Actif': 'Inactif' }}</td>
+							<td>
+								<a href="{{ path('admin.genders.edit', {id: gender.id}) }}" class="btn btn-warning">Modifier</a>
+								{% include 'Backend/Components/_deleteForm.html.twig' with {
+									url: path('admin.genders.delete', {id: gender.id }), 
+									message: 'Êtes-vous sûr de vouloir supprimer ce genre', 
+									id: gender.id
+								} %}
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</section>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'Backend/base.html.twig' %}
+
+{% block title %}Taxe index
+{% endblock %}
+
+{% block body %}
+	<h1>Taxe index</h1>
+	<a href="{{ path('admin.taxes.create') }}">Create new</a>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Rate</th>
+				<th>Enable</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for taxe in taxes %}
+				<tr>
+					<td>{{ taxe.id }}</td>
+					<td>{{ taxe.name }}</td>
+					<td>{{ taxe.rate }}</td>
+					<td>{{ taxe.enable ? 'Yes' : 'No' }}</td>
+					<td>
+						<a href="{{ path('admin.taxes.edit', {'id': taxe.id}) }}">edit</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="5">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+
+{% endblock %}

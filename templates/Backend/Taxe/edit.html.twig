@@ -1,0 +1,14 @@
+{% extends 'Backend/base.html.twig' %}
+
+{% block title %}Edit Taxe
+{% endblock %}
+
+{% block body %}
+	<h1>Edit Taxe</h1>
+
+	{{ include('backend/taxe/_form.html.twig', {'button_label': 'Update'}) }}
+
+	<a href="{{ path('admin.taxes.index') }}">back to list</a>
+
+	{{ include('backend/taxe/_delete_form.html.twig') }}
+{% endblock %}

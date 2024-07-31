@@ -1,0 +1,18 @@
+{% extends 'Backend/base.html.twig' %}
+
+{% block title %}
+	Administration des models
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<section class="container mt-2">
+		<h1 class="text-center">Administration des models</h1>
+		<a href="{{ path('admin.models.create') }}" class="btn btn-primary">Créer un model</a>
+		<div class="card-marque-list mt-4">
+			{% for model in models %}
+				{% include 'Components/Cards/_modelCard.html.twig' with { showDetails: true } %}
+			{% endfor %}
+		</div>
+	</section>
+{% endblock %}

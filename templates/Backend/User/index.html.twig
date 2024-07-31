@@ -1,0 +1,42 @@
+{% extends 'Backend/base.html.twig' %}
+
+{% block title %}
+	Admin des users
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<section class="container mt-2">
+		<h1 class="text-center">Admin des Users</h1>
+		<a href="{{ path('app.register') }}" class="btn btn-primary">Créer un utilisateur</a>
+		<table>
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Username</th>
+					<th>Email</th>
+					<th>Roles</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for user in users %}
+					<tr>
+						<td>{{ user.id }}</td>
+						<td>{{ user.fullName }}</td>
+						<td>{{ user.email }}</td>
+						<td>{{ user.roles|join(', ')|replace({'ROLE_': ''})|title }}</td>
+						<td>
+							<a href="{{ path('admin.users.edit', {id: user.id}) }}" class="btn btn-warning">Editer</a>
+							{% include 'Backend/Components/_deleteForm.html.twig' with {
+									url: path('admin.users.delete', {id: user.id }), 
+									message: 'Êtes-vous sûr de vouloir supprimer cet utilisateur', 
+									id: user.id
+							} %}
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</section>
+{% endblock %}

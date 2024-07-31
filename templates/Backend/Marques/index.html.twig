@@ -1,0 +1,49 @@
+{% extends 'Backend/base.html.twig' %}
+
+{% block title %}
+	Admin des marques
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<section class="container mt-2">
+		<h1 class="text-center">Administration des marques</h1>
+		<a href="{{ path('admin.marques.create') }}" class="btn btn-primary">Créer une marque</a>
+		<div class="d-flex justify-content-between align-items-center mt-4">
+			{% if marques.getTotalItemCount > 0 %}
+				<p class="mb-0">{{ marques.getTotalItemCount }}
+					{{ marques.getTotalItemCount > 1 ? 'marques' : 'marque' }}</p>
+			{% else %}
+				<p class="text-center">Aucune marque</p>
+			{% endif %}
+			<div class="filter">
+				<form action="{{ path('admin.marques.index', app.request.query.all()) }}" method="GET" class="form-filter">
+					<input type="text" name="search" placeholder="Rechercher" class="form-control" value="{{ app.request.query.get('search') }}">
+					<button type="submit">
+						<svg width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M17.4999 17.5L13.8749 13.875M9.16689 15.833C10.0492 15.8438 10.9249 15.6794 11.7432 15.3492C12.5615 15.019 13.3061 14.5297 13.9339 13.9096C14.5616 13.2895 15.06 12.5509 15.4002 11.7367C15.7404 10.9225 15.9155 10.0489 15.9155 9.16651C15.9155 8.28412 15.7404 7.4105 15.4002 6.59631C15.06 5.78213 14.5616 5.04356 13.9339 4.42345C13.3061 3.80334 12.5615 3.31401 11.7432 2.98383C10.9249 2.65366 10.0492 2.48921 9.16689 2.50001C7.41297 2.52149 5.73817 3.23331 4.50548 4.48119C3.2728 5.72906 2.58154 7.41246 2.58154 9.16651C2.58154 10.9206 3.2728 12.604 4.50548 13.8518C5.73817 15.0997 7.41297 15.8115 9.16689 15.833Z" stroke="#666666" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+					</button>
+				</form>
+				<div class="dropdown">
+					<button class="btn btn-primary dropdown-toggle" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Limit
+					</button>
+					<div class="dropdown-menu dropdown-menu-end" aria-labelledby="triggerId">
+						<a class="dropdown-item text-end" href="{{ path('admin.marques.index', app.request.query.all()|merge({limit:9})) }}">9</a>
+						<a class="dropdown-item text-end" href="{{ path('admin.marques.index', app.request.query.all()|merge({limit:18})) }}">18</a>
+						<a class="dropdown-item text-end" href="{{ path('admin.marques.index', app.request.query.all()|merge({limit:36})) }}">36</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="card-marque-list mt-2">
+			{% for marque in marques %}
+				{% include 'Components/Cards/_marqueCard.html.twig' %}
+			{% endfor %}
+		</div>
+		<div class="navigation">
+			{{ knp_pagination_render(marques) }}
+		</div>
+	</section>
+{% endblock %}

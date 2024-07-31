@@ -1,0 +1,13 @@
+{% extends 'Backend/base.html.twig' %}
+
+{% block title %}
+	Modification d'un genre
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<section class="container mt-2">
+		<h1 class="text-center">Modification d'un genre</h1>
+		{% include 'Backend/Gender/_form.html.twig' with {buttonLabel: 'Modifier'} %}
+	</section>
+{% endblock %}
